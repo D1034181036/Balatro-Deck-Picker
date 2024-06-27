@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balatro Deck Picker</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0 10px;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .title {
+            margin-bottom: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .owl-carousel {
+            width: 100%;
+            max-width: 384px; /* 設置最大寬度 */
+        }
+
+        .owl-carousel .item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .owl-carousel .item img {
+            width: 142px;
+            height: 190px;
+            object-fit: cover; /* 確保圖片不會變形 */
+        }
+
+        .owl-stage-outer {
+            overflow: visible;
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Balatro Deck Picker</h1>
+    <div class="owl-carousel owl-theme">
+        <div class="item"><img src="assets/imgs/01_Red_Deck.webp" alt="Image 1"></div>
+        <div class="item"><img src="assets/imgs/02_Blue_Deck.webp" alt="Image 2"></div>
+        <div class="item"><img src="assets/imgs/03_Yellow_Deck.webp" alt="Image 3"></div>
+        <div class="item"><img src="assets/imgs/04_Green_Deck.webp" alt="Image 4"></div>
+        <div class="item"><img src="assets/imgs/05_Black_Deck.webp" alt="Image 5"></div>
+        <div class="item"><img src="assets/imgs/06_Magic_Deck.webp" alt="Image 6"></div>
+        <div class="item"><img src="assets/imgs/07_Nebula_Deck.webp" alt="Image 7"></div>
+        <div class="item"><img src="assets/imgs/08_Ghost_Deck.webp" alt="Image 8"></div>
+        <div class="item"><img src="assets/imgs/09_Abandoned_Deck.webp" alt="Image 9"></div>
+        <div class="item"><img src="assets/imgs/10_Checkered_Deck.webp" alt="Image 10"></div>
+        <div class="item"><img src="assets/imgs/11_Zodiac_Deck.webp" alt="Image 11"></div>
+        <div class="item"><img src="assets/imgs/12_Painted_Deck.webp" alt="Image 12"></div>
+        <div class="item"><img src="assets/imgs/13_Anaglyph_Deck.webp" alt="Image 13"></div>
+        <div class="item"><img src="assets/imgs/14_Plasma_Deck.webp" alt="Image 14"></div>
+        <div class="item"><img src="assets/imgs/15_Erratic_Deck.webp" alt="Image 15"></div>
+    </div>
+    <button id="slideButton" class="btn btn-lg btn-success px-5">GO</button>
+
+    <!-- JS -->
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var owl = $('.owl-carousel');
+            owl.owlCarousel({
+                loop: true,
+                margin: 20,
+                nav: false,
+                items: 2,
+                center: true,
+                autoplay: false,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1,
+                        stagePadding: 0
+                    },
+                    300: {
+                        items: 2,
+                        stagePadding: 20
+                    },
+                }
+            });
+
+            $('#slideButton').click(function() {
+                $('#slideButton').prop('disabled', true);
+
+                const imageCount = 15;
+                const baseTime = 50;
+
+                const randomSeconds = Math.floor(Math.random() * imageCount) * baseTime;
+                owl.trigger('play.owl.autoplay', [baseTime]);
+
+                setTimeout(function() {
+                    owl.trigger('stop.owl.autoplay');
+                    $('#slideButton').prop('disabled', false);
+                }, 1500 + randomSeconds);
+            });
+        });
+    </script>
+</body>
+</html>
